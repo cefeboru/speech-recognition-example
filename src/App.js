@@ -1,22 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import MicOffIcon from '@mui/icons-material/MicOff';
+// import MicNoneIcon from '@mui/icons-material/MicNone';
+import IconButton from '@mui/material/IconButton';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <IconButton className='mic-button' color='primary' aria-label="listen" size="large">
+          <MicOffIcon className='mic-icon'/>
+        </IconButton>
       </header>
     </div>
   );

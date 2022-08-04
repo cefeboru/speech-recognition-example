@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #a7a7a7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,11 +28,11 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mic-button {
+  width: 100px;
+  height: 100px;
+}
+
+.mic-icon {
+  font-size: 3rem !important;
 }
