@@ -10,11 +10,11 @@ function App() {
 
   const Icon = isLestening ? MicIcon : MicOffIcon;
 
-  const handleMouseDown = () => {
+  const startListening = () => {
     setIsListening(true);
   };
 
-  const handleMouseUp = () => {
+  const stopListening = () => {
     setIsListening(false);
   };
 
@@ -26,12 +26,12 @@ function App() {
           color="primary"
           aria-label="listen"
           size="large"
+          onMouseDown={startListening}
+          onMouseUp={stopListening}
+          onTouchStart={startListening}
+          onTouchEnd={stopListening}
         >
-          <Icon
-            className="mic-icon"
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-          />
+          <Icon className="mic-icon" />
         </IconButton>
       </header>
     </div>
