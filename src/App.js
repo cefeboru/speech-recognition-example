@@ -45,6 +45,7 @@ function App() {
           onMouseUp={stopListening}
           onTouchStart={startListening}
           onTouchEnd={stopListening}
+          onTouchCancel={stopListening}
         >
           <Icon className="mic-icon" />
         </IconButton>
