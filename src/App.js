@@ -4,19 +4,34 @@ import React from "react";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import MicIcon from "@mui/icons-material/Mic";
 import IconButton from "@mui/material/IconButton";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 function App() {
-  const [isLestening, setIsListening] = React.useState(false);
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
 
-  const Icon = isLestening ? MicIcon : MicOffIcon;
+  const Icon = listening ? MicIcon : MicOffIcon;
 
   const startListening = () => {
-    setIsListening(true);
+    resetTranscript();
+    SpeechRecognition.startListening({
+      language: "es-HN",
+    });
   };
 
   const stopListening = () => {
-    setIsListening(false);
+    SpeechRecognition.stopListening();
   };
+
+  if (!browserSupportsSpeechRecognition) {
+    return <div>Broswer is not supported!</div>;
+  }
 
   return (
     <div className="App">
@@ -33,6 +48,7 @@ function App() {
         >
           <Icon className="mic-icon" />
         </IconButton>
+        <div>{transcript}</div>
       </header>
     </div>
   );
