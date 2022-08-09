@@ -4,6 +4,7 @@ import React from "react";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import MicIcon from "@mui/icons-material/Mic";
 import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -36,19 +37,27 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <IconButton
-          className="mic-button"
-          color="primary"
-          aria-label="listen"
-          size="large"
-          onMouseDown={startListening}
-          onMouseUp={stopListening}
-          onTouchStart={startListening}
-          onTouchEnd={stopListening}
-          onTouchCancel={stopListening}
+        <Tooltip
+          title={
+            listening
+              ? "Listening..."
+              : "Keep button pressed to start listening"
+          }
         >
-          <Icon className="mic-icon" />
-        </IconButton>
+          <IconButton
+            className="mic-button"
+            color="primary"
+            aria-label="listen"
+            size="large"
+            onMouseDown={startListening}
+            onMouseUp={stopListening}
+            onTouchStart={startListening}
+            onTouchEnd={stopListening}
+            onTouchCancel={stopListening}
+          >
+            <Icon className="mic-icon" />
+          </IconButton>
+        </Tooltip>
         <div>{transcript}</div>
       </header>
     </div>
