@@ -25,6 +25,7 @@ function App() {
       command: [
         "I would like to order * (please)",
         "I want to order * (please)",
+        "Can I get * (please)",
       ],
       callback: (comida) => setMessage(`Cooking ${comida}`),
     },
@@ -54,6 +55,7 @@ function App() {
 
   const startListening = () => {
     resetTranscript();
+    setMessage();
     SpeechRecognition.startListening({
       // Comandos no funcionan con es-HN
       // language: "es-HN",
@@ -95,8 +97,8 @@ function App() {
             <Icon className="mic-icon" />
           </IconButton>
         </Tooltip>
-        <div>{transcript}</div>
-        <div>{message}</div>
+        {transcript && <div>{transcript}</div>}
+        {message && <div>{message}</div>}
       </header>
     </div>
   );
