@@ -14,6 +14,13 @@ Material UI is beautiful by design and features a suite of customization options
 ```
 https://mui.com/material-ui/getting-started/overview/
 
+## Sample commands
+react-speech-recognition Library supports commands, for example try asking the following:
+ - What time is it?
+ - I would like to order some pasta, please.
+
+ We can define what actions can be taken if a commands matches the transcript.
+
 
 ## Interesting links
  - Learn more about the speech recognition API: https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition

@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React from "react";
+import React, { useState } from "react";
 import MicOffIcon from "@mui/icons-material/MicOff";
 import MicIcon from "@mui/icons-material/Mic";
 import IconButton from "@mui/material/IconButton";
@@ -10,19 +10,54 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 function App() {
+  const [message, setMessage] = useState();
+  const supporstGeoLocation = navigator.geolocation;
+
+  const commands = [
+    {
+      command: "what time is it",
+      callback: () => {
+        const currentDate = new Date();
+        setMessage(`Current time is: ${currentDate.toISOString()}`);
+      },
+    },
+    {
+      command: [
+        "I would like to order * (please)",
+        "I want to order * (please)",
+      ],
+      callback: (comida) => setMessage(`Cooking ${comida}`),
+    },
+  ];
+
+  if (supporstGeoLocation) {
+    commands.push({
+      command: "where am I",
+      callback: () => {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setMessage(`Latitud: ${latitude}, Longitud: ${longitude}`);
+        });
+      },
+    });
+  }
+
   const {
     transcript,
     listening,
     resetTranscript,
     browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
-
-  const Icon = listening ? MicIcon : MicOffIcon;
+  } = useSpeechRecognition({
+    commands,
+  });
 
   const startListening = () => {
     resetTranscript();
     SpeechRecognition.startListening({
-      language: "es-HN",
+      // Comandos no funcionan con es-HN
+      // language: "es-HN",
+      continuous: true,
     });
   };
 
@@ -33,6 +68,8 @@ function App() {
   if (!browserSupportsSpeechRecognition) {
     return <div>Broswer is not supported!</div>;
   }
+
+  const Icon = listening ? MicIcon : MicOffIcon;
 
   return (
     <div className="App">
@@ -59,6 +96,7 @@ function App() {
           </IconButton>
         </Tooltip>
         <div>{transcript}</div>
+        <div>{message}</div>
       </header>
     </div>
   );
